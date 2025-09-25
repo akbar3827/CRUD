@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.isMenuOpen {
+  transition: all ease-in-out .4s;
+  z-index: 1;
+}
+
+.listMenu {
+  z-index: 0;
+}
+.card {
+  box-shadow: 0 0 10px 5px rgba(156, 163, 175, .2);
+}
+.scroll-x {
+  overflow-x: scroll;
+}
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+.scroll-y {
+  overflow-y: scroll;
+}
+.scroll-y::-webkit-scrollbar {
+  display: none;
+}
+.scale {
+  transition: all .3s ease-in-out;
+}
+.scale:hover {
+  transform: scale(1.05);
+   box-shadow: 0 0 10px 6px rgba(156, 163, 175, .4)
+}
+.scale-b {
+  transition: all .3s ease-in-out;
+}
+.scale-b:hover,
+.scale-b:focus,
+.scale-b:active {
+  transform: scale(1.02);
+   box-shadow: 0 0 8px 4px rgba(156, 163, 175, .5)
+}
+.describe {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.title {
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+@media screen and (width <= 640px)  {
+  .plan-your-trip {
+    justify-content: center;
+    position: absolute;
+    top: 100%;
+    right: 20%;
+    left: 20%;
+  }
+}
