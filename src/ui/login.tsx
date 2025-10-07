@@ -15,16 +15,16 @@ export const LoginForm = () => {
       </nav>
       <div className="mx-auto md:w-[70vw] w-[80%] my-auto flex flex-col items-center lg:w-[50vw]">
         <div className="text-center">
-          <p className="text-3xl lg:text-4xl w-[100%]-12 text-gray-900">
+          <p className="text-3xl lg:text-4xl w-[100%] text-gray-900">
             <b>Welcome back</b>
           </p>
-          <p className="mt-7 lg:text-base md:text-base text-xs text-gray-500">
+          <p className="mt-7 md:text-base text-xs text-gray-500">
             Welcome back! please enter your details.
           </p>
         </div>
         <div className="h-cover rounded-2xl w-[100%] py-10 pb-4 flex flex-col items-center justify-center">
           <form className="w-[80%]">
-            <div className="lg:pt-5 md:pt-5  pb-0 text-bold">
+            <div className="md:pt-5 pb-0 text-bold">
               <label htmlFor="nama" className="">
                 <input
                   // {...form.register("nama")}

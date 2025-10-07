@@ -3,18 +3,15 @@ import { Navbar } from "./navbar";
 import { useParams } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const DetailPROduk = () => {
-  const { card } = APiproduct1();
-  const { id, category } = useParams();
+  const { product, product2 } = APiproduct1();
+  const { id } = useParams();
   const [duration, setDuration] = useState(false);
 
   const prodak = useMemo(
-    () =>
-      card.find((item) => String(item.id) === id && item.category === category),
-    [id, category, card]
+    () => product.find((item) => String(item.id) === id),
+    [id, product]
   );
 
   const CheckOut = () => {
@@ -25,28 +22,13 @@ export const DetailPROduk = () => {
     return setDuration(false);
   };
 
-  // menemukan rating dari card
-  // bulatkan numbernya jika ada yang koma
-  // membuat state untuk bintangnya
-  // buat looping for untuk menyesuaikan bintang dari ratingnya
-  // tambahkan state jika looping true
-  // panggil di element htmml
-
-  // const rating = card.find((item) => Math.floor(Number(item.rating)));
-
-  // const [star, setStar] = useState(<FontAwesomeIcon icon={faStar} />);
-
-  // for (let i = 0; i > rating; i++) {
-  //   setStar(<FontAwesomeIcon icon={faStar} />);
-  // }
-
   return (
     <>
       <Navbar />
-      <div className="w-full pt-20 md:px-10 xl:px-20 lg:px-20 shadow-xl">
+      <div className="w-full pt-20 md:px-10 lg:px-20 shadow-xl">
         {prodak ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-flow-row gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-4">
               {duration ? (
                 <div className="h-28 bg-white w-80 absolute bottom-44">
                   <p>anda telah memesan produk ini</p>
@@ -57,14 +39,14 @@ export const DetailPROduk = () => {
                     <i className="bxr  bx-arrow-left-stroke text-5xl text-gray-500 absolute top-20 left-1"></i>
                   </Link> */}
                 <img
-                  className="bg-gray-100 w-[100%] lg:w-[33rem] rounded-sm"
+                  className="bg-gray-100 w-[100%] rounded-sm"
                   src={prodak.thumbnail}
                   alt={prodak.title}
                 />
               </div>
               <div className="mx-5 text-xs lg:py-8 ">
                 <p className="text-gray-700 mb-2">{prodak.category}</p>
-                <p className="lg:text-4xl text-3xl text-gray-900 font-semibold">
+                <p className="text-3xl text-gray-900 font-semibold">
                   {prodak.title}
                 </p>
                 <div className="mt-2 flex text-center items-center">
@@ -72,17 +54,19 @@ export const DetailPROduk = () => {
                     {prodak.rating}
                   </p>
                 </div>
-                <p className="text-gray-900 text-3xl font-semibold lg:text-5xl pt-8">${prodak.price}</p>
-              <div className="py-10 px-5 flex gap-3">
-                <img
-                  src={prodak.thumbnail}
-                  className="w-8 rounded-full bg-gray-950"
-                />
-                <p className="font-semibold flex items-center">
-                  {prodak.brand}
+                <p className="text-gray-900 text-4xl font-semibold pt-8">
+                  ${prodak.price}
                 </p>
-              </div>
-              <div>{prodak.description}</div>
+                <div className="py-10 px-5 flex gap-3">
+                  <img
+                    src={prodak.thumbnail}
+                    className="w-8 rounded-full bg-gray-950"
+                  />
+                  <p className="font-semibold flex items-center">
+                    {prodak.brand}
+                  </p>
+                </div>
+                <div>{prodak.description}</div>
               </div>
               <Link
                 to="/"
@@ -99,6 +83,49 @@ export const DetailPROduk = () => {
                   </p>
                 </div>
               </Link>
+            </div>
+            <div className="flex flex-wrap gap-4 justify-center items-center pt-10">
+              {product2.map((data) => {
+                return (
+                  <div
+                    data-aos="zoom-in"
+                    className="scale card flex-wrap w-45 lg:w-60 flex-shrink-0 rounded-xl bg-linear-65 from-gray-800 to-gray-300 flex flex-row items-center"
+                    key={data.id}
+                  >
+                    <img
+                      className=" w-[100%] rounded-t-xl"
+                      src={data.category.image}
+                    />
+                    <div className="transform w-[100%] shadow-[0px_-2px_10px_0px_rgba(0,0,0,0.1)] rounded-t-lg bg-white p-2 rounded-b-xl">
+                      <p className="title text-xl font-semibold text-gray-700">
+                        {data.title}
+                      </p>
+                      <p className="text-xs text-gray-500 outline outline-gray-500 px-1 rounded-sm inline-block">
+                        {data.category.slug}
+                      </p>
+                      <p className="describe mt-3 text-gray-700 pt-1 text-xs md:text-base">
+                        {data.description}
+                      </p>
+                      <div className="pt-4 flex justify-between items-center">
+                        <div>
+                          <p className="text-xs font-semibold text-gray-600">
+                            PRICE
+                          </p>
+                          <p className="text-gray-600 font-bold">
+                            ${data.price}
+                          </p>
+                        </div>
+                        <Link
+                          to={`/detailproduk/${data.id}`}
+                          className="scale-b px-7 lg:px-10 items-center flex h-8 rounded-md bg-gray-400 font-bold text-xs text-gray-700"
+                        >
+                          Visit
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </>
         ) : (
